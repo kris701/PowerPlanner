@@ -33,6 +33,8 @@ namespace PowerPlanner
             PositionWindowInCorner();
 
             SetupSlider();
+
+            WindowState = WindowState.Minimized;
         }
 
         private void ValueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
