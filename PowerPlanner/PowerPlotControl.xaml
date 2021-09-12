@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="PowerPlanner.PowerPlotControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PowerPlanner"
+             mc:Ignorable="d"
+             Height="230" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="1" Grid.ColumnSpan="4" Content="Power Chart" Foreground="White"/>
+
+        <Label Grid.Row="1" Content="100%" Foreground="White"/>
+        <Label Grid.Row="3" Content="0%" Foreground="White"/>
+        <Canvas Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="3" x:Name="PlotCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#7F212138"/>
+        <Label Grid.Row="4" Grid.Column="1" Content="60" Foreground="White"/>
+        <Label Grid.Row="4" Grid.Column="4" Content="0" Foreground="White"/>
+
+        <local:DiffLabel x:Name="DiffLabel" Grid.ColumnSpan="5" Grid.Row="5"/>
+    </Grid>
+</UserControl>

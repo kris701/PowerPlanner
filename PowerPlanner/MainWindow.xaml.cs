@@ -91,5 +91,10 @@ namespace PowerPlanner
                 }
             }
         }
+
+        private void PowerGridButton_Click(object sender, RoutedEventArgs e)
+        {
+            PowerPlotControl.ToggleVisibility(this);
+        }
     }
 }
