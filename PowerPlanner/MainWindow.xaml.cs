@@ -34,7 +34,7 @@ namespace PowerPlanner
 
             SetupSlider();
 
-            WindowState = WindowState.Minimized;
+            Visibility = Visibility.Hidden;
         }
 
         private void ValueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -50,7 +50,7 @@ namespace PowerPlanner
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            Visibility = Visibility.Hidden;
         }
 
         private void EditPowerPlansButton_Click(object sender, RoutedEventArgs e)
@@ -60,7 +60,7 @@ namespace PowerPlanner
 
         private void myNotifyIcon_PopupOpened(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Normal;
+            Visibility = Visibility.Visible;
             Activate();
         }
 
