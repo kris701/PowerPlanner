@@ -34,22 +34,6 @@ namespace PowerPlanner
             Visibility = Visibility.Hidden;
         }
 
-        public void ToggleVisibility(Window window)
-        {
-            if (Visibility == Visibility.Visible)
-            {
-                Visibility = Visibility.Collapsed;
-                window.Height = window.Height - this.Height;
-                window.Top = window.Top + this.Height;
-            }
-            else
-            {
-                Visibility = Visibility.Visible;
-                window.Height = window.Height + this.Height;
-                window.Top = window.Top - this.Height;
-            }
-        }
-
         private async Task RunBackground()
         {
             while (true)

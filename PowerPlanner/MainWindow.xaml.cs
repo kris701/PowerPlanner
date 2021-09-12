@@ -19,10 +19,9 @@ namespace PowerPlanner
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ICallback
     {
-        private List<PowerPlan> powerPlans;
-        private int _previousIndex = 0;
+        public List<PowerPlan> PowerPlans { get; set; }
 
         public MainWindow()
         {
@@ -32,32 +31,39 @@ namespace PowerPlanner
 
             PositionWindowInCorner();
 
-            SetupSlider();
+            PowerPlans = PowerManager.GetAllPlans();
+
+            PlanSwitcherControl.Setup(this);
 
             SetupContextMenu();
 
             Visibility = Visibility.Hidden;
         }
 
-        private void ValueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public void ToggleItemInContextField(UserControl element)
         {
-            int newValue = (int)ValueSlider.Value;
-            if (_previousIndex != newValue && newValue != -1)
+            if (element.Visibility == Visibility.Visible)
             {
-                _previousIndex = newValue;
-                PowerManager.SetActive(powerPlans[newValue]);
-                ActivePowerPlanLabel.Content = powerPlans[newValue].Name;
+                element.Visibility = Visibility.Collapsed;
+                this.Height = this.Height - element.Height;
+                this.Top = this.Top + element.Height;
             }
+            else
+            {
+                element.Visibility = Visibility.Visible;
+                this.Height = this.Height + element.Height;
+                this.Top = this.Top - element.Height;
+            }
+        }
+
+        public void AddItemToContextField(UserControl element)
+        {
+            ContextField.Children.Add(element);
         }
 
         private void Window_Deactivated(object sender, EventArgs e)
         {
             Visibility = Visibility.Hidden;
-        }
-
-        private void EditPowerPlansButton_Click(object sender, RoutedEventArgs e)
-        {
-            PowerManager.OpenControlPanel();
         }
 
         private void myNotifyIcon_PopupOpened(object sender, RoutedEventArgs e)
@@ -77,22 +83,6 @@ namespace PowerPlanner
             this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 45;
         }
 
-        private void SetupSlider()
-        {
-            powerPlans = PowerManager.GetAllPlans();
-
-            ValueSlider.Maximum = powerPlans.Count - 1;
-
-            Guid currentPlan = PowerManager.GetActiveGuid();
-            for (int i = 0; i < powerPlans.Count; i++)
-            {
-                if (powerPlans[i].Guid == currentPlan)
-                {
-                    ValueSlider.Value = i;
-                    break;
-                }
-            }
-        }
 
         private void SetupContextMenu()
         {
@@ -105,11 +95,6 @@ namespace PowerPlanner
             myNotifyIcon.ContextMenu.IsOpen = false;
         }
 
-        private void PowerGridButton_Click(object sender, RoutedEventArgs e)
-        {
-            PowerPlotControl.ToggleVisibility(this);
-        }
-
         private void myNotifyIcon_TrayRightMouseDown(object sender, RoutedEventArgs e)
         {
             myNotifyIcon.ContextMenu.IsOpen = true;
@@ -118,6 +103,11 @@ namespace PowerPlanner
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void PowerGridButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleItemInContextField(PowerPlotControl);
         }
     }
 }

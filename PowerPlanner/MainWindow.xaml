@@ -14,16 +14,14 @@
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="2"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="80"/>
             </Grid.RowDefinitions>
 
             <tb:TaskbarIcon x:Name="myNotifyIcon"
@@ -33,22 +31,16 @@
                         TrayMouseDoubleClick="myNotifyIcon_PopupOpened"
                             TrayRightMouseDown="myNotifyIcon_TrayRightMouseDown"/>
 
-            <local:PowerPlotControl x:Name="PowerPlotControl" Grid.ColumnSpan="2"/>
+            <StackPanel x:Name="ContextField" Grid.ColumnSpan="4">
+                <local:PowerPlotControl x:Name="PowerPlotControl"/>
+            </StackPanel>
 
-            <Button x:Name="EditPowerPlansButton" Grid.Row="1" Content="Edit" Click="EditPowerPlansButton_Click" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="20" />
-            <Button x:Name="PowerGridButton" Grid.Row="1" Grid.Column="1" Content="Power Chart" Click="PowerGridButton_Click"  Background="Transparent" Foreground="White" BorderThickness="0" FontSize="20" />
-            <GridSplitter Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Height="2" Background="#FF2D2D5F"/>
-            <Label x:Name="ActivePowerPlanLabel" Grid.Row="3" Grid.ColumnSpan="2" Content="Plan Name" HorizontalContentAlignment="Center" Foreground="White" FontSize="15"/>
-            <Slider 
-                x:Name="ValueSlider" 
-                Grid.Row="4" Grid.ColumnSpan="2"
-                ValueChanged="ValueSlider_ValueChanged" 
-                SmallChange="1" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Minimum="0" 
-                TickPlacement="Both" 
-                IsSnapToTickEnabled="True"/>
+            <Button x:Name="PowerGridButton" Grid.Row="1" Grid.Column="3" Content="Power Chart" Click="PowerGridButton_Click"  Background="Transparent" Foreground="White" BorderThickness="0" FontSize="12" />
+
+            <local:PowerIconControl x:Name="PowerIconControl" Grid.Row="2"/>
+            <local:PlanSwitcherControl x:Name="PlanSwitcherControl" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+
         </Grid>
     </Grid>
 </Window>
