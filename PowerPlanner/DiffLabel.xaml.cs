@@ -22,6 +22,7 @@ namespace PowerPlanner
     {
         private int lastPrc = 0;
         private int currentPrc = 0;
+        private List<int> LatestDiffs = new List<int>();
 
         public DiffLabel()
         {
@@ -39,15 +40,23 @@ namespace PowerPlanner
             currentPrc = (int)(value * 100);
             if (lastPrc == 0)
                 lastPrc = currentPrc;
+            LatestDiffs.Add(currentPrc - lastPrc);
+            if (LatestDiffs.Count > 10)
+                LatestDiffs.RemoveAt(0);
 
-            if (currentPrc == lastPrc)
+            long total = 0;
+            foreach (int i in LatestDiffs)
+                total += i;
+            double totalDiff = (double)total / 10;
+
+            if (totalDiff == 0)
                 ValueLabel.Foreground = new SolidColorBrush(Colors.White);
-            if (currentPrc < lastPrc)
+            if (totalDiff < 0)
                 ValueLabel.Foreground = new SolidColorBrush(Colors.Red);
-            if (currentPrc > lastPrc)
+            if (totalDiff > 0)
                 ValueLabel.Foreground = new SolidColorBrush(Colors.Green);
 
-            ValueLabel.Content = currentPrc - lastPrc;
+            ValueLabel.Content = Math.Round(totalDiff,2);
         }
     }
 }

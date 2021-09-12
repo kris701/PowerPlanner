@@ -60,7 +60,7 @@ namespace PowerPlanner
                         UpdateChart();
                     });
 
-                await Task.Delay(60000);
+                await Task.Delay(10000);
             }
         }
 
@@ -120,6 +120,9 @@ namespace PowerPlanner
                         Stroke = brush
                     });
                 }
+
+                if (PlotCanvas.Children.Count > 60)
+                    PlotCanvas.Children.RemoveAt(0);
             }
         }
     }
