@@ -28,22 +28,11 @@ namespace PowerPlanner
         {
             InitializeComponent();
 
-            powerPlans = PowerManager.GetAllPlans();
+            myNotifyIcon.Icon = new System.Drawing.Icon("powericon.ico");
 
-            ValueSlider.Maximum = powerPlans.Count - 1;
+            PositionWindowInCorner();
 
-            this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
-            this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 45;
-
-            Guid currentPlan = PowerManager.GetActiveGuid();
-            for (int i = 0; i < powerPlans.Count; i++)
-            {
-                if (powerPlans[i].Guid == currentPlan)
-                {
-                    ValueSlider.Value = i;
-                    break;
-                }
-            }
+            SetupSlider();
         }
 
         private void ValueSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -76,6 +65,29 @@ namespace PowerPlanner
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             BlurHelper.EnableBlur(this);
+        }
+
+        private void PositionWindowInCorner()
+        {
+            this.Left = SystemParameters.PrimaryScreenWidth - this.Width - 10;
+            this.Top = SystemParameters.PrimaryScreenHeight - this.Height - 45;
+        }
+
+        private void SetupSlider()
+        {
+            powerPlans = PowerManager.GetAllPlans();
+
+            ValueSlider.Maximum = powerPlans.Count - 1;
+
+            Guid currentPlan = PowerManager.GetActiveGuid();
+            for (int i = 0; i < powerPlans.Count; i++)
+            {
+                if (powerPlans[i].Guid == currentPlan)
+                {
+                    ValueSlider.Value = i;
+                    break;
+                }
+            }
         }
     }
 }

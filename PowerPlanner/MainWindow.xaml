@@ -17,7 +17,7 @@
                         Visibility="Visible"
                         ToolTipText="Power Manager" 
                         PopupActivation="All" 
-                        TrayMouseDoubleClick="myNotifyIcon_PopupOpened" IconSource="/powerIcon.ico"
+                        TrayMouseDoubleClick="myNotifyIcon_PopupOpened"
           />
             <Button x:Name="EditPowerPlansButton" Content="Edit" Click="EditPowerPlansButton_Click" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="20" />
             <GridSplitter HorizontalAlignment="Stretch" Height="2" Background="#FF2D2D5F"/>

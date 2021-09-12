@@ -74,9 +74,6 @@ namespace PowerPlanner
             return name;
         }
 
-        /// <summary>
-        /// Opens Power Options section of the Control Panel.
-        /// </summary>
         public static void OpenControlPanel()
         {
             var root = Environment.GetEnvironmentVariable("SystemRoot");
