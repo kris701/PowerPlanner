@@ -15,7 +15,7 @@
         
             <tb:TaskbarIcon x:Name="myNotifyIcon"
                         Visibility="Visible"
-                        ToolTipText="Power Manager" 
+                        ToolTipText="Power Manager - Double click to open" 
                         PopupActivation="All" 
                         TrayMouseDoubleClick="myNotifyIcon_PopupOpened"
           />
