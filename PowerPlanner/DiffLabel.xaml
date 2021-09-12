@@ -7,7 +7,8 @@
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
         <Label Content="Battery difference: " Foreground="White"/>
-        <Label x:Name="ValueLabel" Content="x" Foreground="White"/>
+        <Label x:Name="ValueLabel" Content="-" Foreground="White"/>
         <Label Content="%/min" Foreground="White"/>
+
     </StackPanel>
 </UserControl>

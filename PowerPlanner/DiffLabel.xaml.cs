@@ -30,8 +30,15 @@ namespace PowerPlanner
 
         public void UpdateLabel(float value)
         {
+            SetValueLabel(value);
+        }
+
+        private void SetValueLabel(float value)
+        {
             lastPrc = currentPrc;
             currentPrc = (int)(value * 100);
+            if (lastPrc == 0)
+                lastPrc = currentPrc;
 
             if (currentPrc == lastPrc)
                 ValueLabel.Foreground = new SolidColorBrush(Colors.White);
