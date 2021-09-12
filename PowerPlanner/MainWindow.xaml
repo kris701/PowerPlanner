@@ -25,13 +25,14 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
-        
+
             <tb:TaskbarIcon x:Name="myNotifyIcon"
                         Visibility="Visible"
                         ToolTipText="Power Manager - Double click to open" 
                         PopupActivation="All" 
                         TrayMouseDoubleClick="myNotifyIcon_PopupOpened"
-          />
+                            TrayRightMouseDown="myNotifyIcon_TrayRightMouseDown"/>
+
             <local:PowerPlotControl x:Name="PowerPlotControl" Grid.ColumnSpan="2"/>
 
             <Button x:Name="EditPowerPlansButton" Grid.Row="1" Content="Edit" Click="EditPowerPlansButton_Click" Background="Transparent" Foreground="White" BorderThickness="0" FontSize="20" />

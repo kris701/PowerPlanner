@@ -34,6 +34,8 @@ namespace PowerPlanner
 
             SetupSlider();
 
+            SetupContextMenu();
+
             Visibility = Visibility.Hidden;
         }
 
@@ -92,9 +94,30 @@ namespace PowerPlanner
             }
         }
 
+        private void SetupContextMenu()
+        {
+            ContextMenu contextMenu = new ContextMenu();
+            MenuItem item = new MenuItem();
+            item.Header = "Exit";
+            item.Click += ExitButton_Click;
+            contextMenu.Items.Add(item);
+            myNotifyIcon.ContextMenu = contextMenu;
+            myNotifyIcon.ContextMenu.IsOpen = false;
+        }
+
         private void PowerGridButton_Click(object sender, RoutedEventArgs e)
         {
             PowerPlotControl.ToggleVisibility(this);
+        }
+
+        private void myNotifyIcon_TrayRightMouseDown(object sender, RoutedEventArgs e)
+        {
+            myNotifyIcon.ContextMenu.IsOpen = true;
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
