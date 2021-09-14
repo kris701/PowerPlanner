@@ -4,8 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PowerPlanner"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             Width="40" Height="80">
     <Grid>
-        <Image Source="/powerIcon.ico"/>
+        <Grid Width="27" Height="40" Margin="0,4,0,0" >
+            <Canvas x:Name="PowerHeightCanvas" Background="Gray" Height="40" VerticalAlignment="Bottom" />
+        </Grid>
+        <Label x:Name="PowerLabel" Content="x%" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <Image Source="/powerIconEmpty.png" Width="30"/>
     </Grid>
 </UserControl>

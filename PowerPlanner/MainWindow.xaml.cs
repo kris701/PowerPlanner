@@ -23,6 +23,8 @@ namespace PowerPlanner
     {
         public List<PowerPlan> PowerPlans { get; set; }
 
+        public System.Windows.Forms.PowerStatus PowerStatus => System.Windows.Forms.SystemInformation.PowerStatus;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace PowerPlanner
             PowerPlans = PowerManager.GetAllPlans();
 
             PlanSwitcherControl.Setup(this);
+            PowerPlotControl.Setup(this);
+            PowerIconControl.Setup(this);
 
             SetupContextMenu();
 

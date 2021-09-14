@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using winForms = System.Windows.Forms;
-
 namespace PowerPlanner
 {
     /// <summary>
@@ -22,12 +20,18 @@ namespace PowerPlanner
     /// </summary>
     public partial class PowerPlotControl : UserControl
     {
+        private ICallback _callback;
         private double _canvasHeight = 0;
         private double _canvasWidth = 0;
 
         public PowerPlotControl()
         {
             InitializeComponent();
+        }
+
+        public void Setup(ICallback callback)
+        {
+            _callback = callback;
 
             Task.Run(RunBackground);
 
@@ -60,9 +64,7 @@ namespace PowerPlanner
             }
             else
             {
-                winForms.PowerStatus pwr = winForms.SystemInformation.PowerStatus;
-
-                DiffLabel.UpdateLabel(pwr.BatteryLifePercent);
+                DiffLabel.UpdateLabel(_callback.PowerStatus.BatteryLifePercent);
 
                 double xOffset = _canvasWidth / 60;
                 Line lastLine = null;
@@ -77,7 +79,7 @@ namespace PowerPlanner
                     }
                 }
 
-                double newYPos = _canvasHeight - (pwr.BatteryLifePercent * _canvasHeight);
+                double newYPos = _canvasHeight - (_callback.PowerStatus.BatteryLifePercent * _canvasHeight);
                 Brush brush = new SolidColorBrush(Colors.Gray);
 
                 if (lastLine == null)

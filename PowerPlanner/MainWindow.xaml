@@ -29,7 +29,7 @@
                         ToolTipText="Power Manager - Double click to open" 
                         PopupActivation="All" 
                         TrayMouseDoubleClick="myNotifyIcon_PopupOpened"
-                            TrayRightMouseDown="myNotifyIcon_TrayRightMouseDown"/>
+                        TrayRightMouseDown="myNotifyIcon_TrayRightMouseDown"/>
 
             <StackPanel x:Name="ContextField" Grid.ColumnSpan="4">
                 <local:PowerPlotControl x:Name="PowerPlotControl"/>

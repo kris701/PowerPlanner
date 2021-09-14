@@ -20,14 +20,41 @@ namespace PowerPlanner
     /// </summary>
     public partial class PowerIconControl : UserControl
     {
+        private ICallback _callback;
+        private int PowerCanvasHeight = 0;
+
         public PowerIconControl()
         {
             InitializeComponent();
+
+            PowerCanvasHeight = (int)PowerHeightCanvas.Height;
+        }
+
+        public void Setup(ICallback callback)
+        {
+            _callback = callback;
+            
+            Task.Run(RunBackground);
+        }
+
+        private async Task RunBackground()
+        {
+            while (true)
+            {
+                Application.Current.Dispatcher.Invoke(
+                    System.Windows.Threading.DispatcherPriority.Normal, (Action)delegate
+                    {
+                        Update();
+                    });
+
+                await Task.Delay(60000);
+            }
         }
 
         public void Update()
         {
-
+            PowerLabel.Content = $"{_callback.PowerStatus.BatteryLifePercent * 100}%";
+            PowerHeightCanvas.Height = _callback.PowerStatus.BatteryLifePercent * PowerCanvasHeight;
         }
     }
 }
