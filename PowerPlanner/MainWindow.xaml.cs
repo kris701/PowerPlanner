@@ -27,6 +27,9 @@ namespace PowerPlanner
 
         public MainWindow()
         {
+            SplashScreen.SplashScreen splashScreen = new SplashScreen.SplashScreen();
+            splashScreen.Show();
+
             InitializeComponent();
 
             myNotifyIcon.Icon = new System.Drawing.Icon("powericon.ico");
