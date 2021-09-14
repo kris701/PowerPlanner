@@ -48,7 +48,11 @@ namespace PowerPlanner
                         UpdateChart();
                     });
 
-                await Task.Delay(10000);
+#if DEBUG
+                await Task.Delay(5000);
+#else
+                await Task.Delay(60000);
+#endif
             }
         }
 
