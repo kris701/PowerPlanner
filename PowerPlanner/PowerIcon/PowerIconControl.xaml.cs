@@ -57,7 +57,7 @@ namespace PowerPlanner
 
         public void Update()
         {
-            PowerLabel.Content = $"{_callback.PowerStatus.BatteryLifePercent * 100}%";
+            PowerLabel.Content = $"{Math.Round(_callback.PowerStatus.BatteryLifePercent * 100,0)}%";
             PowerHeightCanvas.Height = _callback.PowerStatus.BatteryLifePercent * PowerCanvasHeight;
         }
     }
